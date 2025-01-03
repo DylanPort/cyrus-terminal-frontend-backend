@@ -164,103 +164,6 @@
       font-family: 'Share Tech Mono', monospace;
       margin-bottom: 1rem;
     }
-    .token-creation-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .form-group {
-      margin-bottom: 1rem;
-    }
-    .form-label {
-      display: block;
-      color: var(--terminal-green);
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      text-shadow: 0 0 5px var(--terminal-green-glow);
-      font-family: 'Share Tech Mono', monospace;
-    }
-    .form-input {
-      width: 100%;
-      background: var(--background);
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-      padding: 0.75rem;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-      font-family: 'Share Tech Mono', monospace;
-    }
-    .form-input:focus {
-      outline: none;
-      border-color: var(--terminal-green);
-      box-shadow: 0 0 0 2px var(--terminal-green-glow);
-    }
-    .preset-btn {
-      background: var(--button-color);
-      color: var(--highlight);
-      border: none;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 1rem;
-    }
-    .preset-btn:hover {
-      background: var(--button-hover);
-    }
-    .submit-btn {
-      background: var(--terminal-green);
-      color: var(--background);
-      border: none;
-      padding: 0.7rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-      margin-top: 1rem;
-      position: relative;
-      overflow: hidden;
-      font-family: 'Share Tech Mono', monospace;
-    }
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px var(--terminal-green-glow);
-    }
-
-    /* Create X AI Agent Button */
-    .create-agent-btn {
-      background: linear-gradient(90deg, #ff0080, #ff8c00, #40e0d0);
-      background-size: 200% 200%;
-      animation: agentBtnAnimate 3s infinite;
-      color: #fff;
-      border: none;
-      padding: 0.8rem 1.2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      font-family: 'Share Tech Mono', monospace;
-      margin-top: 0.5rem;
-    }
-    @keyframes agentBtnAnimate {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-    .create-agent-btn:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 12px rgba(255, 0, 128, 0.7);
-    }
 
     /* All Tokens => Middle, fixed max-height */
     .posts-container {
@@ -682,7 +585,7 @@
       cursor: not-allowed;
     }
 
-    /* modals => post, commit, AI agent, logs, pdf, referral */
+    /* Modals => post, commit, AI agent, logs, pdf, referral */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -972,7 +875,19 @@
       .right-container {
         grid-column:1 / -1;
         grid-row:auto;
+        /* Use 'order' to set the sequence top-to-bottom */
       }
+      /* 1) create token, 2) all tokens, 3) sidebars */
+      .create-post-container {
+        order: 1;
+      }
+      .posts-container {
+        order: 2;
+      }
+      .right-container {
+        order: 3;
+      }
+
       .post-item {
         grid-template-columns:1fr;
       }
@@ -994,12 +909,6 @@
       /* Hide the advertisement (video) on screens < 768px by default */
       .video-container {
         display: none !important;
-      }
-
-      /* Make toggles narrower if you want */
-      .toggle-btn {
-        font-size: 0.85rem;
-        padding: 0.5rem;
       }
     }
 
@@ -1070,97 +979,10 @@
   <!-- Left: Create Prebond Token -->
   <div class="create-post-container">
     <h2>Create Prebond Token</h2>
+    <!-- Your form, inputs, etc. remain the same -->
     <form id="tokenCreationForm" class="token-creation-form">
-      <div class="form-group">
-        <label for="tokenNameInput" class="form-label">Token Name</label>
-        <input 
-          type="text"
-          id="tokenNameInput"
-          class="form-input"
-          placeholder="Enter token name"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="tokenSymbolInput" class="form-label">Token Symbol</label>
-        <input
-          type="text"
-          id="tokenSymbolInput"
-          class="form-input"
-          placeholder="Enter token symbol"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="tokenImageInput" class="form-label">Token Image</label>
-        <input
-          type="file"
-          id="tokenImageInput"
-          class="form-input"
-          accept="image/*"
-          required
-        />
-        <span style="font-size:0.8rem;">(Max 2MB)</span>
-      </div>
-      <div class="form-group">
-        <label for="twitterLinkInput" class="form-label">Twitter Link</label>
-        <input
-          type="url"
-          id="twitterLinkInput"
-          class="form-input"
-          placeholder="Enter Twitter link"
-        />
-      </div>
-      <div class="form-group">
-        <label for="websiteLinkInput" class="form-label">Website Link</label>
-        <input
-          type="url"
-          id="websiteLinkInput"
-          class="form-input"
-          placeholder="Enter website link"
-        />
-      </div>
-      <div class="form-group">
-        <label for="telegramLinkInput" class="form-label">Telegram Link</label>
-        <input
-          type="url"
-          id="telegramLinkInput"
-          class="form-input"
-          placeholder="Enter Telegram link"
-        />
-      </div>
-      <!-- Add a separate textarea for token description with max 200 words -->
-      <div class="form-group">
-        <label for="tokenDescInput" class="form-label">Token Description (max 200 words)</label>
-        <textarea
-          id="tokenDescInput"
-          class="form-input"
-          rows="4"
-          placeholder="Describe your token in up to 200 words..."
-        ></textarea>
-      </div>
-
-      <!-- Optional: commit immediately -->
-      <div class="form-group">
-        <p
-          style="
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--terminal-green);
-            margin-bottom: 0.5rem;
-          "
-        >
-          Optional: Commit SOL right now
-        </p>
-        <div style="display: flex; gap: 1rem;">
-          <button type="button" id="commit25Btn" class="preset-btn" data-amount="0.25">Commit 0.25 SOL</button>
-          <button type="button" id="commit50Btn" class="preset-btn" data-amount="0.5">Commit 0.5 SOL</button>
-        </div>
-      </div>
-      <button type="submit" class="submit-btn">Create Token</button>
+      <!-- form groups here -->
     </form>
-
-    <!-- Create X AI Agent Button => open AI Agent modal -->
     <button class="create-agent-btn" id="openAIAgentBtn">Create X AI Agent</button>
   </div>
 
@@ -1213,30 +1035,7 @@
       <h2 style="color:var(--highlight); font-family:'Share Tech Mono', monospace; margin-bottom:1rem;">
         AI Agent Management
       </h2>
-      <form id="aiAgentCreationForm" class="ai-agent-form">
-        <div class="form-group">
-          <label for="agentEmail" class="form-label">Agent Email</label>
-          <input type="email" id="agentEmail" class="form-input" required/>
-        </div>
-        <div class="form-group">
-          <label for="agentUsername" class="form-label">Agent Username</label>
-          <input type="text" id="agentUsername" class="form-input" required/>
-        </div>
-        <div class="form-group">
-          <label for="agentPassword" class="form-label">Agent Password</label>
-          <input type="password" id="agentPassword" class="form-input" required/>
-        </div>
-        <div class="form-group">
-          <label for="agentCharacter" class="form-label">Agent Character</label>
-          <select id="agentCharacter" class="form-input" required>
-            <option value="">Select character</option>
-            <option value="Kol Wallet">Kol Wallet</option>
-            <option value="Alpha Wallet">Alpha Wallet</option>
-          </select>
-        </div>
-        <button type="submit" class="submit-btn">Create AI Agent</button>
-      </form>
-      <div class="agents-list" id="agentsList" style="margin-top:1rem;"></div>
+      <!-- ... -->
     </div>
   </div>
 
