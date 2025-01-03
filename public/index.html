@@ -156,7 +156,7 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      max-height: 600px;
+      max-height: 600px; /* This is for desktop */
       overflow-y: auto;
     }
     .create-post-container h2 {
@@ -270,7 +270,7 @@
       border-radius: 15px;
       padding: 1.5rem;
       box-shadow: 0 4px 6px var(--shadow-color);
-      max-height: 600px;
+      max-height: 600px; /* This is for desktop */
       overflow-y: auto;
     }
     .posts-container h2 {
@@ -286,6 +286,8 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      max-height: 600px; /* desktop only */
+      overflow-y: auto;
     }
     .toggle-buttons {
       display: flex;
@@ -973,6 +975,7 @@
       .right-container {
         grid-column:1 / -1;
         grid-row:auto;
+        max-height: none; /* remove the 600px so content can scroll */
       }
       .post-item {
         grid-template-columns:1fr;
@@ -1009,10 +1012,11 @@
         flex-direction: column;
         align-items: flex-end;
       }
+      /* Remove fixed heights for small screens as well */
       .create-post-container,
       .posts-container,
       .right-container {
-        max-height: 500px; /* Adjust for smaller screens */
+        max-height: none;
       }
       .create-agent-btn {
         font-size: 0.8rem;
@@ -1165,8 +1169,8 @@
       <button class="toggle-btn" id="showTrendingBtn"><i class="fas fa-fire"></i> Show Trending</button>
       <button class="toggle-btn" id="showMigratedBtn"><i class="fas fa-exchange-alt"></i> Show Migrated</button>
       <button class="toggle-btn" id="showReferralBtn"><i class="fas fa-link"></i> Show Referral</button>
-      <!-- If you want a separate toggle for video, uncomment below: -->
-      <!-- <button class="toggle-btn" id="showVideoBtn"><i class="fas fa-play-circle"></i> Show Video</button> -->
+      <!-- If you want a separate toggle for video, uncomment below:
+      <button class="toggle-btn" id="showVideoBtn"><i class="fas fa-play-circle"></i> Show Video</button> -->
     </div>
 
     <!-- Trend -->
