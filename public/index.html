@@ -156,7 +156,7 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      max-height: 600px; /* This is for desktop */
+      max-height: 600px;
       overflow-y: auto;
     }
     .create-post-container h2 {
@@ -270,7 +270,7 @@
       border-radius: 15px;
       padding: 1.5rem;
       box-shadow: 0 4px 6px var(--shadow-color);
-      max-height: 600px; /* This is for desktop */
+      max-height: 600px;
       overflow-y: auto;
     }
     .posts-container h2 {
@@ -286,8 +286,6 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      max-height: 600px; /* desktop only */
-      overflow-y: auto;
     }
     .toggle-buttons {
       display: flex;
@@ -330,7 +328,6 @@
       padding: 1.5rem;
     }
 
-    /* The video container is now sized the same as trending/migrated */
     .video-container {
       background: var(--card-bg);
     }
@@ -964,7 +961,7 @@
       }
     }
 
-    /* Mobile (below 768px) => hide advertisement sidebar */
+    /* Mobile (below 768px) => hide advertisement sidebar, rearrange layout */
     @media (max-width:768px){
       body {
         grid-template-columns: 1fr;
@@ -975,13 +972,13 @@
       .right-container {
         grid-column:1 / -1;
         grid-row:auto;
-        max-height: none; /* remove the 600px so content can scroll */
       }
       .post-item {
         grid-template-columns:1fr;
       }
       .post-image {
-        width:100%; height:auto;
+        width:100%; 
+        height:auto;
       }
       .chat-container {
         display: block;
@@ -994,9 +991,15 @@
         grid-column:1 / 2;
       }
 
-      /* Hide the advertisement (video) on screens < 768px */
+      /* Hide the advertisement (video) on screens < 768px by default */
       .video-container {
         display: none !important;
+      }
+
+      /* Make toggles narrower if you want */
+      .toggle-btn {
+        font-size: 0.85rem;
+        padding: 0.5rem;
       }
     }
 
@@ -1011,22 +1014,23 @@
       .header {
         flex-direction: column;
         align-items: flex-end;
+        gap: 0.5rem;
       }
-      /* Remove fixed heights for small screens as well */
       .create-post-container,
       .posts-container,
       .right-container {
-        max-height: none;
+        max-height: 500px; /* Adjust for smaller screens */
       }
       .create-agent-btn {
         font-size: 0.8rem;
+        padding: 0.6rem 1rem;
       }
       .toggle-btn {
-        font-size: 0.8rem;
-        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.7rem;
       }
       .post-title {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
       }
       .post-ticker {
         font-size: 1rem;
@@ -1044,6 +1048,10 @@
       }
       .footer a {
         font-size: 0.8rem;
+      }
+      .commit-btn, .refund-btn, .transfer-btn, .upvote-btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.7rem;
       }
     }
   </style>
@@ -1169,8 +1177,6 @@
       <button class="toggle-btn" id="showTrendingBtn"><i class="fas fa-fire"></i> Show Trending</button>
       <button class="toggle-btn" id="showMigratedBtn"><i class="fas fa-exchange-alt"></i> Show Migrated</button>
       <button class="toggle-btn" id="showReferralBtn"><i class="fas fa-link"></i> Show Referral</button>
-      <!-- If you want a separate toggle for video, uncomment below:
-      <button class="toggle-btn" id="showVideoBtn"><i class="fas fa-play-circle"></i> Show Video</button> -->
     </div>
 
     <!-- Trend -->
